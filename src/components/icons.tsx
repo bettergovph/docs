@@ -159,7 +159,11 @@ export function BetterGovLogo({ className, 'aria-label': ariaLabel, 'aria-hidden
       className={className}
       viewBox="0 0 1080 1080"
       xmlns="http://www.w3.org/2000/svg"
+      aria-label={ariaLabel}
+      aria-hidden={ariaHidden}
+      role={ariaHidden ? undefined : "img"}
     >
+      {title && <title>{title}</title>}
       <defs>
         <style>{`.cls-1{fill:#0032a0;}`}</style>
       </defs>

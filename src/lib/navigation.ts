@@ -1,3 +1,5 @@
+import React from 'react';
+
 /**
  * Navigation configuration for BetterGov Documentation
  */
@@ -6,6 +8,7 @@ export interface NavigationItem {
   title: string;
   href: string;
   description?: string;
+  icon?: React.ReactNode;
   children?: NavigationItem[];
 }
 

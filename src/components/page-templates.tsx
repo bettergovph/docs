@@ -3,7 +3,7 @@ import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/page
 import { type TOCItemType } from 'fumadocs-core/server';
 import { Breadcrumb } from '@/components/navigation';
 import { cn } from '@/lib/utils';
-import { LightbulbIcon, BookIcon, UserIcon, HandshakeIcon } from '@/components/icons';
+import { BookIcon, UserIcon } from '@/components/icons';
 
 /**
  * Enhanced metadata interface for documentation pages

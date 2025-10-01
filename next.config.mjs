@@ -36,39 +36,8 @@ const config = {
     formats: ['image/webp', 'image/avif']
   },
 
-  // Redirect configuration for clean URLs
-  async redirects() {
-    return [
-      {
-        source: '/docs',
-        destination: '/docs/getting-started',
-        permanent: true
-      }
-    ];
-  },
-
-  // Headers for better security and performance
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY'
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff'
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin'
-          }
-        ]
-      }
-    ];
-  },
+  // Note: redirects and headers are not supported with static export
+  // For static hosting, configure these at the hosting provider level
 
   // Output configuration for static deployment
   output: process.env.NODE_ENV === 'production' ? 'export' : undefined,

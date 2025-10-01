@@ -7,10 +7,6 @@ export default function Layout({ children }: LayoutProps<'/docs'>) {
     <DocsLayout 
       tree={source.pageTree} 
       {...baseOptions()}
-      search={{
-        enabled: true,
-        api: '/api/search'
-      }}
     >
       {children}
     </DocsLayout>

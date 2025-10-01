@@ -80,10 +80,38 @@ export function FeatureCard({
           </div>
         </div>
 
+        {/* Status Badge */}
+        {status && (
+          <div className="mb-3">
+            <span className={cn(
+              "inline-flex items-center px-2 py-1 rounded-full text-xs font-medium",
+              status === 'available' && "bg-green-100 text-green-800",
+              status === 'coming-soon' && "bg-yellow-100 text-yellow-800",
+              status === 'beta' && "bg-blue-100 text-blue-800"
+            )}>
+              {status === 'coming-soon' ? 'Coming Soon' : status.charAt(0).toUpperCase() + status.slice(1)}
+            </span>
+          </div>
+        )}
+
         {/* Description */}
         <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
           {description}
         </p>
+
+        {/* Tags */}
+        {tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            {tags.map((tag, index) => (
+              <span
+                key={index}
+                className="inline-flex items-center px-2 py-1 rounded-md bg-muted text-muted-foreground text-xs"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
 
 
 
