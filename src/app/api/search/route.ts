@@ -1,7 +1,12 @@
+import { createSearchAPI } from 'fumadocs-core/search/server';
 import { source } from '@/lib/source';
-import { createFromSource } from 'fumadocs-core/search/server';
 
-export const { GET } = createFromSource(source, {
-  // https://docs.orama.com/docs/orama-js/supported-languages
-  language: 'english',
+export const { GET } = createSearchAPI('simple', {
+  indexes: source.getPages().map((page) => ({
+    title: page.data.title,
+    content: page.data.description || '',
+    structuredData: page.data.structuredData,
+    id: page.url,
+    url: page.url,
+  })),
 });

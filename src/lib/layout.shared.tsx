@@ -1,7 +1,8 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
+import { BetterGovLogo } from '@/components/icons';
 
 /**
- * Shared layout configurations
+ * Shared layout configurations for BetterGov Documentation
  *
  * you can customise layouts individually from:
  * Home Layout: app/(home)/layout.tsx
@@ -11,20 +12,23 @@ export function baseOptions(): BaseLayoutProps {
   return {
     nav: {
       title: (
-        <>
-          <svg
-            width="24"
-            height="24"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-label="Logo"
-          >
-            <circle cx={12} cy={12} r={12} fill="currentColor" />
-          </svg>
-          My App
-        </>
+        <div className="flex items-center gap-2">
+          <BetterGovLogo className="w-6 h-6" />
+          <span className="font-semibold">BetterGov Documentation</span>
+        </div>
       ),
     },
-    // see https://fumadocs.dev/docs/ui/navigation/links
-    links: [],
+    links: [
+      {
+        text: 'GitHub',
+        url: 'https://github.com/bettergovph/bettergov',
+        external: true,
+      },
+      {
+        text: 'bettergov.ph',
+        url: 'https://bettergov.ph',
+        external: true,
+      },
+    ],
   };
 }

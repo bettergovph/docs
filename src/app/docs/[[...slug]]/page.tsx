@@ -1,14 +1,41 @@
 import { getPageImage, source } from '@/lib/source';
-import {
-  DocsBody,
-  DocsDescription,
-  DocsPage,
-  DocsTitle,
-} from 'fumadocs-ui/page';
 import { notFound } from 'next/navigation';
 import { getMDXComponents } from '@/mdx-components';
 import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
+import {
+  BasePageTemplate,
+  GettingStartedTemplate,
+  ApiReferenceTemplate,
+  UserGuideTemplate,
+  ContributingTemplate,
+  type PageMetadata,
+} from '@/components/page-templates';
+
+/**
+ * Select appropriate template based on page category or path
+ */
+function getPageTemplate(category?: string, slug?: string[]) {
+  const path = slug?.join('/') || '';
+  
+  if (category === 'getting-started' || path.startsWith('getting-started')) {
+    return GettingStartedTemplate;
+  }
+  
+  if (category === 'api' || path.startsWith('developer/api')) {
+    return ApiReferenceTemplate;
+  }
+  
+  if (category === 'user-guide' || path.startsWith('user')) {
+    return UserGuideTemplate;
+  }
+  
+  if (category === 'contributing' || path.startsWith('contributing')) {
+    return ContributingTemplate;
+  }
+  
+  return BasePageTemplate;
+}
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params;
@@ -16,20 +43,33 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   if (!page) notFound();
 
   const MDX = page.data.body;
+  
+  // Extract metadata from page data
+  const metadata: PageMetadata = {
+    title: page.data.title,
+    description: page.data.description,
+    category: page.data.category,
+    order: page.data.order,
+    tags: page.data.tags,
+    lastUpdated: page.data.lastUpdated,
+    author: page.data.author,
+    difficulty: page.data.difficulty,
+    prerequisites: page.data.prerequisites,
+    relatedPages: page.data.relatedPages,
+  };
+  
+  // Select appropriate template
+  const Template = getPageTemplate(metadata.category, params.slug);
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
-      <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
-      <DocsBody>
-        <MDX
-          components={getMDXComponents({
-            // this allows you to link to other pages with relative file paths
-            a: createRelativeLink(source, page),
-          })}
-        />
-      </DocsBody>
-    </DocsPage>
+    <Template metadata={metadata} toc={page.data.toc}>
+      <MDX
+        components={getMDXComponents({
+          // this allows you to link to other pages with relative file paths
+          a: createRelativeLink(source, page),
+        })}
+      />
+    </Template>
   );
 }
 

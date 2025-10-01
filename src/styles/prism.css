@@ -1,0 +1,163 @@
+/* Prism.js syntax highlighting theme - customized for dark/light mode */
+
+/* Base styles */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: hsl(var(--foreground));
+  background: none;
+  text-shadow: none;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  tab-size: 4;
+  hyphens: none;
+}
+
+/* Tokens */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: hsl(var(--muted-foreground));
+  font-style: italic;
+}
+
+.token.punctuation {
+  color: hsl(var(--muted-foreground));
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #f97316; /* Orange */
+}
+
+.token.boolean,
+.token.number {
+  color: #8b5cf6; /* Purple */
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #10b981; /* Green */
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+  color: #06b6d4; /* Cyan */
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+  color: #3b82f6; /* Blue */
+}
+
+.token.keyword {
+  color: #ec4899; /* Pink */
+  font-weight: 600;
+}
+
+.token.regex,
+.token.important {
+  color: #f59e0b; /* Amber */
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+/* Language-specific adjustments */
+.language-json .token.property {
+  color: #3b82f6; /* Blue for JSON keys */
+}
+
+.language-bash .token.function {
+  color: #10b981; /* Green for bash commands */
+}
+
+.language-typescript .token.keyword {
+  color: #3b82f6; /* Blue for TS keywords */
+}
+
+.language-jsx .token.tag,
+.language-tsx .token.tag {
+  color: #f97316; /* Orange for JSX tags */
+}
+
+.language-jsx .token.attr-name,
+.language-tsx .token.attr-name {
+  color: #8b5cf6; /* Purple for JSX attributes */
+}
+
+/* Line highlighting */
+.line-highlight {
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 3px solid #3b82f6;
+  margin: 0 -1rem;
+  padding: 0 1rem;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .token.property,
+  .token.tag,
+  .token.constant,
+  .token.symbol,
+  .token.deleted {
+    color: #fb923c; /* Lighter orange for dark mode */
+  }
+
+  .token.selector,
+  .token.attr-name,
+  .token.string,
+  .token.char,
+  .token.builtin,
+  .token.inserted {
+    color: #34d399; /* Lighter green for dark mode */
+  }
+
+  .token.operator,
+  .token.entity,
+  .token.url,
+  .language-css .token.string,
+  .style .token.string,
+  .token.variable {
+    color: #22d3ee; /* Lighter cyan for dark mode */
+  }
+
+  .token.atrule,
+  .token.attr-value,
+  .token.function,
+  .token.class-name {
+    color: #60a5fa; /* Lighter blue for dark mode */
+  }
+
+  .token.keyword {
+    color: #f472b6; /* Lighter pink for dark mode */
+  }
+}

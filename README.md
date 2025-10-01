@@ -1,45 +1,50 @@
-# docs
+# BetterGov Documentation
 
-This is a Next.js application generated with
-[Create Fumadocs](https://github.com/fuma-nama/fumadocs).
+Documentation site for the BetterGov platform built with Fumadocs and Next.js.
 
-Run development server:
+## About
+
+BetterGov.ph is a community-led initiative to create a better and more usable Philippine national government website. This documentation provides guides, API references, and resources for contributors and users.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18 or higher
+- npm or yarn package manager
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/bettergovph/bettergov-docs.git
+cd bettergov-docs/docs
+
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
-# or
-pnpm dev
-# or
-yarn dev
 ```
 
-Open http://localhost:3000 with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the documentation site.
 
-## Explore
+## Available Scripts
 
-In the project, you can see:
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run code linting
+- `npm run format` - Format code with Prettier
+- `npm run validate` - Run all validation checks
 
-- `lib/source.ts`: Code for content source adapter, [`loader()`](https://fumadocs.dev/docs/headless/source-api) provides the interface to access your content.
-- `lib/layout.shared.tsx`: Shared options for layouts, optional but preferred to keep.
+## Contributing
 
-| Route                     | Description                                            |
-| ------------------------- | ------------------------------------------------------ |
-| `app/(home)`              | The route group for your landing page and other pages. |
-| `app/docs`                | The documentation layout and pages.                    |
-| `app/api/search/route.ts` | The Route Handler for search.                          |
+Contributions are welcome! Please read our contributing guidelines and feel free to submit issues and pull requests.
 
-### Fumadocs MDX
+## Links
 
-A `source.config.ts` config file has been included, you can customise different options like frontmatter schema.
-
-Read the [Introduction](https://fumadocs.dev/docs/mdx) for further details.
-
-## Learn More
-
-To learn more about Next.js and Fumadocs, take a look at the following
-resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Fumadocs](https://fumadocs.vercel.app) - learn about Fumadocs
+- Main Platform: [bettergov.ph](https://bettergov.ph)
+- GitHub: [github.com/bettergovph/bettergov](https://github.com/bettergovph/bettergov)
+- Discord: [Join our community](https://discord.gg/mHtThpN8bT)
+- Email: [volunteers@bettergov.ph](mailto:volunteers@bettergov.ph)

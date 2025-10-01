@@ -1,0 +1,8 @@
+{
+  "pages": [
+    "about",
+    "getting-started",
+    "meilisearch", 
+    "contributing"
+  ]
+}
