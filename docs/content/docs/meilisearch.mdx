@@ -1,0 +1,359 @@
+---
+title: Meilisearch Setup
+description: Set up Meilisearch for BetterGov's search functionality
+---
+
+import { Steps } from 'fumadocs-ui/components/steps';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+This guide covers setting up Meilisearch for BetterGov's search functionality and documents all the data processing scripts.
+
+## What's Inside
+
+- [Getting Started with Meilisearch](#getting-started-with-meilisearch) - Set up search for your local development
+- [Working with Data](#working-with-data) - Process and manage government data
+- [Building the Site](#building-the-site) - Generate sitemaps and metadata
+- [Managing Contractors](#managing-contractors) - Handle contractor profile data
+- [Flood Control Projects](#flood-control-projects) - Work with flood control data
+
+## Getting Started with Meilisearch
+
+Think of Meilisearch as the brain behind BetterGov's search feature. It helps users quickly find government services, offices, and information they need.
+
+### What You'll Need
+
+Before we begin, make sure you have these ready:
+
+1. **Node.js** version 22 or newer (check with `node --version`)
+2. **A text editor** to update configuration files
+3. **Terminal access** to run commands
+4. **About 10 minutes** for the initial setup
+
+### Setting Everything Up
+
+<Steps>
+
+### Install Meilisearch
+
+<Tabs items={['macOS', 'Windows', 'Linux', 'Docker']}>
+
+<Tab value="macOS">
+
+Using Homebrew:
+```bash
+brew install meilisearch
+```
+
+Or download directly:
+```bash
+curl -L https://install.meilisearch.com | sh
+```
+
+</Tab>
+
+<Tab value="Windows">
+
+Using PowerShell (run as Administrator):
+```powershell
+# Download the latest Windows executable
+Invoke-WebRequest -Uri "https://github.com/meilisearch/meilisearch/releases/latest/download/meilisearch-windows-amd64.exe" -OutFile "meilisearch.exe"
+
+# Run Meilisearch
+.\meilisearch.exe --master-key="your_master_key_here"
+```
+
+Or use Windows Subsystem for Linux (WSL):
+```bash
+# In WSL terminal
+curl -L https://install.meilisearch.com | sh
+```
+
+</Tab>
+
+<Tab value="Linux">
+
+Ubuntu/Debian:
+```bash
+# Download and install
+curl -L https://install.meilisearch.com | sh
+
+# Or using apt (after adding repository)
+echo "deb [trusted=yes] https://apt.fury.io/meilisearch/ /" | sudo tee /etc/apt/sources.list.d/fury.list
+sudo apt update && sudo apt install meilisearch
+```
+
+Fedora/CentOS/RHEL:
+```bash
+# Download binary
+curl -L https://install.meilisearch.com | sh
+```
+
+</Tab>
+
+<Tab value="Docker">
+
+```bash
+docker pull getmeili/meilisearch:latest
+docker run -p 7700:7700 -e MEILI_MASTER_KEY="your_master_key_here" getmeili/meilisearch:latest
+```
+
+</Tab>
+
+</Tabs>
+
+### Set Up Configuration
+
+Create a `.env` file in the project root:
+
+```bash
+# Where Meilisearch lives
+VITE_MEILISEARCH_HOST=http://localhost
+VITE_MEILISEARCH_PORT=7700
+
+# Your master key (keep this secret!)
+MEILISEARCH_MASTER_KEY=aSampleMasterKey
+
+# Search key for the frontend (we'll generate this in Step 4)
+VITE_MEILISEARCH_SEARCH_API_KEY=your_search_api_key_here
+
+# Perplexity API key (required for contractor data processing)
+PERPLEXITY_API_KEY=your_perplexity_api_key_here
+```
+
+<Callout type="info">
+The master key can be any value you choose - it's like your admin password. The search key is read-only, perfect for the frontend.
+</Callout>
+
+### Start Meilisearch
+
+<Tabs items={['macOS/Linux', 'Windows', 'Docker']}>
+
+<Tab value="macOS/Linux">
+
+```bash
+# If installed locally
+meilisearch --master-key="your_master_key_here"
+
+# Or if you downloaded the binary directly
+./meilisearch --master-key="your_master_key_here"
+```
+
+</Tab>
+
+<Tab value="Windows">
+
+```powershell
+# In PowerShell
+.\meilisearch.exe --master-key="your_master_key_here"
+
+# Or in Command Prompt
+meilisearch.exe --master-key="your_master_key_here"
+```
+
+</Tab>
+
+<Tab value="Docker">
+
+```bash
+docker run -p 7700:7700 -e MEILI_MASTER_KEY="your_master_key_here" getmeili/meilisearch:latest
+```
+
+</Tab>
+
+</Tabs>
+
+### Populate Initial Data
+
+Before generating keys, populate Meilisearch with data:
+
+```bash
+# Add the main government data
+npm run index:meilisearch
+
+# Add flood control data
+npm run index:flood-control:arcgis
+
+# Add contractor profiles (requires PERPLEXITY_API_KEY)
+npm run index:contractor-profiles
+```
+
+### Generate Search Key
+
+Create a search key for the website:
+
+```bash
+npm run index:create-key
+```
+
+Copy the generated key and update your `.env` file:
+
+```bash
+VITE_MEILISEARCH_SEARCH_API_KEY=<paste_your_generated_key_here>
+```
+
+### Verify Everything Works
+
+Start your development server and test search:
+
+```bash
+npm run dev
+```
+
+Visit http://localhost:5173 and try searching for government services.
+
+</Steps>
+
+## Loading Your Data
+
+### Quick Setup (All Indexes)
+
+Load all indexes at once:
+
+```bash
+# Load all indexes in one command
+npm run index:all
+```
+
+This runs:
+1. `npm run index:meilisearch` - Main government data
+2. `npm run index:flood-control:arcgis` - Flood control projects
+3. `npm run index:contractor-profiles` - Contractor profiles
+
+### Individual Indexes
+
+**Main Government Data:**
+```bash
+# Add or update data
+npm run index:meilisearch
+
+# Rebuild from scratch
+npm run index:meilisearch:reset
+```
+
+**Flood Control Projects:**
+```bash
+# Update flood control data
+npm run index:flood-control:arcgis
+
+# Rebuild flood control index
+npm run index:flood-control:arcgis:reset
+```
+
+**Contractor Information:**
+```bash
+# Step 1: Download latest data (requires PERPLEXITY_API_KEY)
+npm run fetch:contractor-profiles
+
+# Step 2: Clean up and remove duplicates
+npm run process:unique-contractors
+
+# Step 3: Add to search index
+npm run index:contractor-profiles
+```
+
+## Working with Data
+
+Data processing scripts:
+
+**URL and Navigation:**
+- `add-directory-slugs.js` - Creates clean URLs for directory pages
+- `add-lgu-slugs.js` - Creates URLs for Local Government Unit pages
+
+**Data Organization:**
+- `extract-regions.js` - Organizes data by Philippine regions
+- `extract-websites.js` - Collects official government website URLs
+- `flatten-contacts.js` - Makes contact info searchable
+- `split-lgu.cjs` - Breaks up large LGU files for faster loading
+- `split-services.js` - Organizes services by category
+- `fetch-hrep.js` - Gets House of Representatives member data
+
+## Building the Site
+
+Generate files for search engines and AI assistants:
+
+```bash
+# Generate sitemap for search engines
+npm run generate:sitemap
+
+# Generate llms.txt for AI assistants
+npm run generate:llms-txt
+
+# Generate both at once
+npm run generate:metadata
+```
+
+## Managing Contractors
+
+Update contractor information (run in order):
+
+1. **Download data:** `npm run fetch:contractor-profiles` (requires `PERPLEXITY_API_KEY`)
+2. **Clean data:** `npm run process:unique-contractors` (also requires `PERPLEXITY_API_KEY`)
+3. **Index data:** `npm run index:contractor-profiles`
+
+Get your Perplexity API key at [Perplexity AI Settings](https://www.perplexity.ai/settings/api).
+
+## Flood Control Projects
+
+Two ways to manage flood control data:
+
+**From Local Files:**
+- `index_flood_control.cjs` - Uses JSON files in the project
+
+**From ArcGIS (Recommended):**
+- `index_flood_control_arcgis.js` - Pulls latest data from government GIS
+
+### Cloudflare D1 Database
+
+For Cloudflare deployment:
+
+```bash
+cd src/data/flood_control
+node load_flood_control.js
+```
+
+Requires:
+- Wrangler CLI setup
+- D1 database configured
+- `flood_control.json` data file
+
+## Troubleshooting
+
+### "Can't connect to Meilisearch"
+
+- Make sure Meilisearch is running
+- Check your `.env` file has correct host and port
+- Verify master key matches
+
+### "API key not found"
+
+1. Run `npm run index:create-key`
+2. Copy the generated key
+3. Update your `.env` file
+
+### "Search isn't finding anything"
+
+- Check if indexing finished without errors
+- Try `npm run index:meilisearch:reset` to rebuild
+- Look for error messages in terminal
+
+### "Out of memory" errors
+
+Give Node more memory:
+
+```bash
+NODE_OPTIONS="--max-old-space-size=4096" npm run index:meilisearch
+```
+
+## Resources
+
+- [Meilisearch Documentation](https://www.meilisearch.com/docs)
+- [JavaScript SDK Guide](https://github.com/meilisearch/meilisearch-js)
+- [Contributing to BetterGov](/docs/contributing)
+
+## Need Help?
+
+1. Check the troubleshooting section above
+2. Search [GitHub issues](https://github.com/bettergovph/bettergov/issues)
+3. Ask in our [Discord community](https://discord.gg/mHtThpN8bT)
+4. Open a new issue if you found a bug
