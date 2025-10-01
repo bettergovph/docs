@@ -39,8 +39,8 @@ const config = {
   // Note: redirects and headers are not supported with static export
   // For static hosting, configure these at the hosting provider level
 
-  // Output configuration for static deployment
-  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
+  // Output configuration - removed static export to support API routes
+  // output: 'export', // Commented out to enable API routes on Vercel
   trailingSlash: false,
   
   // Asset prefix for CDN deployment (can be configured later)
