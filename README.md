@@ -2,9 +2,11 @@
 
 Documentation site for the BetterGov platform built with Fumadocs and Next.js.
 
+Visit the live documentation at: **[docs.bettergov.ph](https://docs.bettergov.ph)**
+
 ## About
 
-BetterGov.ph is a community-led initiative to create a better and more usable Philippine national government website. This documentation provides guides, API references, and resources for contributors and users.
+This repository contains the documentation for BetterGov.ph - a community-led initiative to create a better and more usable Philippine national government website.
 
 ## Getting Started
 
