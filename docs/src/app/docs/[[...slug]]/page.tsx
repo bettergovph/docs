@@ -1,5 +1,5 @@
 import { getPageImage, source } from '@/lib/source';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { getMDXComponents } from '@/mdx-components';
 import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
@@ -39,6 +39,12 @@ function getPageTemplate(category?: string, slug?: string[]) {
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params;
+  
+  // If accessing /docs directly (no slug), redirect to about page
+  if (!params.slug || params.slug.length === 0) {
+    redirect('/docs/about');
+  }
+  
   const page = source.getPage(params.slug);
   if (!page) notFound();
 

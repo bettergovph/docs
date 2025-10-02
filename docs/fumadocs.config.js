@@ -5,7 +5,7 @@ const config = {
   // Site metadata
   site: {
     title: 'BetterGov Documentation',
-    description: 'Comprehensive documentation for the BetterGov platform - empowering citizens and improving government transparency.',
+    description: 'Documentation for BetterGov.ph - a modern platform that centralizes Philippine government services and information.',
     url: 'https://docs.bettergov.ph',
     logo: {
       text: 'BetterGov',
@@ -70,54 +70,6 @@ const config = {
           {
             title: 'Installation & Setup',
             href: '/docs/getting-started/installation'
-          },
-          {
-            title: 'Quick Start Guide',
-            href: '/docs/getting-started/quick-start'
-          },
-          {
-            title: 'Project Structure',
-            href: '/docs/getting-started/project-structure'
-          }
-        ]
-      },
-      {
-        title: 'Developer Guide',
-        href: '/docs/developer',
-        items: [
-          {
-            title: 'Architecture Overview',
-            href: '/docs/developer/architecture'
-          },
-          {
-            title: 'API Reference',
-            href: '/docs/developer/api'
-          },
-          {
-            title: 'Component Library',
-            href: '/docs/developer/components'
-          },
-          {
-            title: 'Database Schema',
-            href: '/docs/developer/database'
-          }
-        ]
-      },
-      {
-        title: 'User Guide',
-        href: '/docs/user',
-        items: [
-          {
-            title: 'Platform Overview',
-            href: '/docs/user/overview'
-          },
-          {
-            title: 'Feature Tutorials',
-            href: '/docs/user/tutorials'
-          },
-          {
-            title: 'FAQ',
-            href: '/docs/user/faq'
           }
         ]
       },
@@ -126,18 +78,18 @@ const config = {
         href: '/docs/contributing',
         items: [
           {
-            title: 'Development Workflow',
-            href: '/docs/contributing/workflow'
-          },
-          {
-            title: 'Code Standards',
-            href: '/docs/contributing/standards'
-          },
-          {
             title: 'Testing Guidelines',
             href: '/docs/contributing/testing'
+          },
+          {
+            title: 'Code of Conduct',
+            href: '/docs/contributing/code-of-conduct'
           }
         ]
+      },
+      {
+        title: 'Meilisearch',
+        href: '/docs/meilisearch'
       }
     ]
   },

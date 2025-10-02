@@ -3,12 +3,6 @@ import { NextRequest, NextResponse } from 'next/server';
 // Static search data - this should match your actual pages
 const searchIndex = [
   {
-    id: '/docs',
-    title: 'Documentation',
-    content: 'BetterGov Documentation - Comprehensive documentation for BetterGov.ph',
-    url: '/docs'
-  },
-  {
     id: '/docs/about',
     title: 'About',
     content: 'About BetterGov - Learn about our mission and goals',
