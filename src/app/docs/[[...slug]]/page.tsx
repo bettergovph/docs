@@ -63,6 +63,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
     difficulty: page.data.difficulty,
     prerequisites: page.data.prerequisites,
     relatedPages: page.data.relatedPages,
+    icon: page.data.icon,
   };
   
   // Select appropriate template

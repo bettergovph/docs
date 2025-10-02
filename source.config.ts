@@ -15,7 +15,8 @@ const customFrontmatterSchema = frontmatterSchema.extend({
   author: z.string().optional(),
   difficulty: z.enum(['beginner', 'intermediate', 'advanced']).optional(),
   prerequisites: z.array(z.string()).optional(),
-  relatedPages: z.array(z.string()).optional()
+  relatedPages: z.array(z.string()).optional(),
+  icon: z.string().optional()
 });
 
 // Enhanced meta schema for navigation

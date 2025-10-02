@@ -3,7 +3,7 @@ import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/page
 import { type TOCItemType } from 'fumadocs-core/server';
 import { Breadcrumb } from '@/components/navigation';
 import { cn } from '@/lib/utils';
-import { BookIcon, UserIcon } from '@/components/icons';
+import { BookIcon, UserIcon, BetterGovLogo } from '@/components/icons';
 
 /**
  * Enhanced metadata interface for documentation pages
@@ -19,6 +19,7 @@ export interface PageMetadata {
   difficulty?: 'beginner' | 'intermediate' | 'advanced';
   prerequisites?: string[];
   relatedPages?: string[];
+  icon?: string;
 }
 
 /**
@@ -38,13 +39,26 @@ interface BasePageTemplateProps {
  * Page metadata header component
  */
 function PageHeader({ metadata }: { metadata: PageMetadata }) {
+  // Map icon names to components
+  const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+    BetterGovLogo,
+    BookIcon,
+    UserIcon,
+  };
+  
+  const IconComponent = metadata.icon ? iconMap[metadata.icon] : null;
+  
   return (
     <div className="mb-6 space-y-4">
       <Breadcrumb />
       
       <div className="space-y-2">
-        
-        <DocsTitle className="text-3xl font-bold">{metadata.title}</DocsTitle>
+        <div className="flex items-center gap-4">
+          {IconComponent && (
+            <IconComponent className="h-12 w-12 flex-shrink-0" aria-hidden="true" />
+          )}
+          <DocsTitle className="text-3xl font-bold">{metadata.title}</DocsTitle>
+        </div>
         
         {metadata.description && (
           <DocsDescription className="text-lg text-muted-foreground">
