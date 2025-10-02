@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 19, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/rainb/OneDrive/Desktop/bettergovdocs/src/app/%28home%29/page.tsx"],"sourcesContent":["import Link from 'next/link';\r\n\r\nexport default function HomePage() {\r\n  return (\r\n    <main className=\"flex flex-1 flex-col justify-center text-center px-4\">\r\n      <h1 className=\"mb-4 text-4xl font-bold\">BetterGov Documentation</h1>\r\n      <p className=\"text-fd-muted-foreground mb-6 max-w-2xl mx-auto\">\r\n        A community-led initiative to create a better and more usable Philippine national government website.\r\n        Learn how to contribute, set up your development environment, and help build a better digital government experience.\r\n      </p>\r\n      <Link\r\n        href=\"/docs\"\r\n        className=\"inline-flex items-center justify-center rounded-lg bg-fd-primary px-6 py-4 text-lg font-semibold text-fd-primary-foreground hover:bg-fd-primary/90 transition-colors w-fit mx-auto\"\r\n      >\r\n        Get Started\r\n      </Link>\r\n    </main>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;AAAA;;;AAEe,SAAS;IACtB,qBACE,8OAAC;QAAK,WAAU;;0BACd,8OAAC;gBAAG,WAAU;0BAA0B;;;;;;0BACxC,8OAAC;gBAAE,WAAU;0BAAkD;;;;;;0BAI/D,8OAAC,uKAAI;gBACH,MAAK;gBACL,WAAU;0BACX;;;;;;;;;;;;AAKP","debugId":null}}]
+}
