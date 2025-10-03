@@ -1,3 +1,19 @@
 @import 'tailwindcss';
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
+
+/* Custom TOC styles - make it collapsible/less intrusive */
+@layer components {
+  /* Make TOC collapsible on smaller screens */
+  @media (max-width: 1280px) {
+    [data-toc] {
+      display: none;
+    }
+  }
+  
+  /* Optional: Add a max-height and scroll for long TOCs */
+  [data-toc] {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+  }
+}
