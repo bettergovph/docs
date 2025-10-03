@@ -16,6 +16,9 @@ function cleanForMDX(content) {
   // Replace HTML comments with JSX comments
   content = content.replace(/<!--([\s\S]*?)-->/g, '{/*$1*/}');
   
+  // Remove "back to top" links
+  content = content.replace(/<p align="right">\(<a href="#readme-top">back to top<\/a>\)<\/p>\s*/g, '');
+  
   // Replace unsupported code block languages
   const languageMap = {
     'env': 'bash',
