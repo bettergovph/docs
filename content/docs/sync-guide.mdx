@@ -1,0 +1,127 @@
+---
+title: Documentation Sync Guide
+description: Learn how to sync documentation from the main BetterGov repository
+---
+
+# Documentation Sync Guide
+
+This guide explains how the BetterGov documentation site automatically syncs with the main [BetterGov repository](https://github.com/bettergovph/bettergov) to keep documentation up-to-date.
+
+## Automatic Sync
+
+The documentation site automatically syncs with the main BetterGov repository through GitHub Actions:
+
+### Scheduled Sync
+- **Frequency**: Every 12 hours
+- **Trigger**: Automated cron job
+- **Process**: Checks for changes in documentation files and creates pull requests
+
+### Manual Sync
+- **Trigger**: Manual workflow dispatch
+- **Access**: GitHub Actions tab → "Sync Documentation from BetterGov" → "Run workflow"
+
+## Files Synced
+
+The following files are automatically synced from the main repository:
+
+| Source File | Target Location | Description |
+|-------------|----------------|-------------|
+| `README.md` | `content/docs/about.mdx` | Main project information |
+| `docs/Meilisearch.md` | `content/docs/meilisearch.mdx` | Search setup guide |
+| `CONTRIBUTING.md` | `content/docs/contributing/index.mdx` | Contributing guidelines |
+| `CODE_OF_CONDUCT.md` | `content/docs/contributing/code-of-conduct.mdx` | Community guidelines |
+| `TESTING.md` | `content/docs/contributing/testing.mdx` | Testing guide |
+
+## Manual Sync Commands
+
+### Using npm script
+```bash
+# Sync documentation files
+npm run sync-docs
+```
+
+### Using Git (Advanced)
+```bash
+# Fetch latest changes from upstream
+git fetch upstream
+
+# Check what files have changed
+git diff HEAD upstream/main --name-only
+
+# Merge specific documentation files
+git checkout upstream/main -- README.md docs/ CONTRIBUTING.md CODE_OF_CONDUCT.md TESTING.md
+
+# Commit the changes
+git add .
+git commit -m "docs: sync documentation from BetterGov repository"
+git push
+```
+
+## Sync Process
+
+1. **Fetch**: Downloads latest content from BetterGov repository
+2. **Transform**: Converts markdown files to MDX format with proper frontmatter
+3. **Validate**: Checks file integrity and format
+4. **Commit**: Creates commit with synced changes
+5. **PR**: Creates pull request for review (if automated)
+
+## Configuration
+
+The sync process is configured in:
+- **Workflow**: `.github/workflows/sync-docs.yml`
+- **Script**: `scripts/sync-docs.js`
+- **Files**: Defined in the sync script's `FILES_TO_SYNC` array
+
+## Troubleshooting
+
+### Sync Failed
+- Check GitHub Actions logs for detailed error messages
+- Verify repository permissions and access tokens
+- Ensure source files exist in the BetterGov repository
+
+### Files Not Updating
+- Verify the file paths in the sync configuration
+- Check if the source files have been moved or renamed
+- Review the transform functions for proper content conversion
+
+### Rate Limiting
+- The sync script includes delays to avoid GitHub API rate limits
+- If you hit rate limits, wait before running manual syncs
+
+## Adding New Files to Sync
+
+To sync additional documentation files:
+
+1. **Edit** `scripts/sync-docs.js`
+2. **Add** new file configuration to `FILES_TO_SYNC` array:
+   ```javascript
+   {
+     source: 'path/to/source.md',
+     target: 'content/docs/target.mdx',
+     transform: (content) => {
+       const frontmatter = `---
+title: Page Title
+description: Page description
+---
+
+`;
+       return frontmatter + content;
+     }
+   }
+   ```
+3. **Test** the sync locally: `npm run sync-docs`
+4. **Commit** the changes to enable automatic syncing
+
+## Best Practices
+
+- **Review Changes**: Always review synced content before merging
+- **Test Locally**: Run `npm run sync-docs` locally before pushing changes
+- **Monitor Logs**: Check GitHub Actions logs for sync status
+- **Update Config**: Keep sync configuration up-to-date with repository changes
+
+## Support
+
+If you encounter issues with the sync process:
+- Check the [GitHub Actions logs](https://github.com/Justin322322/BetterGov-Docs/actions)
+- Open an issue in this repository
+- Contact the maintainers for assistance

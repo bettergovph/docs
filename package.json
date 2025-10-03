@@ -22,7 +22,8 @@
     "preview": "npm run build && npm run start",
     "clean": "rimraf .next out",
     "check-links": "node scripts/check-links.js",
-    "generate-sitemap": "node scripts/generate-sitemap.js"
+    "generate-sitemap": "node scripts/generate-sitemap.js",
+    "sync-docs": "node scripts/sync-docs.js"
   },
   "dependencies": {
     "@types/prismjs": "^1.26.5",
