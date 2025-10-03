@@ -49,10 +49,10 @@ function cleanForMDX(content) {
 // Files to sync from BetterGov repository
 const FILES_TO_SYNC = [
   {
-    source: 'README.md',
+    source: 'ABOUT.md',
     target: 'content/docs/about.mdx',
     transform: (content) => {
-      // Convert README.md to MDX format with frontmatter
+      // Convert ABOUT.md to MDX format with frontmatter
       const frontmatter = `---
 title: About BetterGov
 description: Learn about the BetterGov initiative and our mission to improve Philippine government websites

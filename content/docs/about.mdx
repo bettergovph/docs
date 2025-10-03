@@ -3,131 +3,74 @@ title: About BetterGov
 description: Learn about the BetterGov initiative and our mission to improve Philippine government websites
 ---
 
-# BetterGov.ph
+## Inspiration
 
-A community-led initiative to create a better and more usable Philippine national government website.
+The inspiration for BetterGov.ph came from recognizing the need to modernize and streamline access to Philippine government services. While the government provides numerous essential services, finding and accessing them can be challenging for citizens. We wanted to create a user-friendly, intuitive platform that brings these services together in one place, making government services more accessible to all Filipinos.
 
-## Why We're Building This Project
+## What it does
 
-The current state of Philippine government websites, particularly the main portal [www.gov.ph](https://www.gov.ph), presents numerous challenges for citizens:
+BetterGov.ph serves as a centralized portal for Philippine government services, offering:
 
-- The main Gov.ph website is outdated and has not been updated for a long time
-- Full of broken links and difficult navigation paths
-- Inconsistent formatting and design across pages
-- Poor user experience and accessibility issues
-- Similar problems exist across most Philippine government agency websites
+- A modern, user-friendly interface for accessing government services
+- Real-time information widgets (weather updates, forex rates)
+- Comprehensive service directory with easy filtering and search
+- Multilingual support (English and Filipino)
+- Mobile-responsive design for access on any device
+- Latest news and updates from government agencies
+- Detailed information about government structure and officials
 
-These issues create barriers for citizens trying to access essential government services and information.
+## How we built it
 
-## Our Mission
+The platform is built using modern web technologies:
 
-We are a volunteer-led initiative with a clear mission: to provide a 'better' and 'usable' website for the Philippines.
+- React for the frontend framework
+- TypeScript for type safety and better development experience
+- Tailwind CSS for responsive and maintainable styling
+- Radix UI for accessible component primitives
+- Lucide React for consistent iconography
+- React Router for client-side routing
+- Context API for state management
+- Vite for fast development and optimized builds
 
-Our goals include:
+## Challenges we ran into
 
-- Building a proper national website that reflects Filipino values and culture
-- Creating intuitive navigation and search functionality
-- Ensuring accessibility for all citizens, including those with disabilities
-- Providing accurate, up-to-date information about government services
-- Establishing a model for how government digital services can and should work
+- Organizing and categorizing the vast number of government services effectively
+- Implementing a responsive design that works across all device sizes
+- Ensuring accessibility for users with different abilities
+- Managing multilingual support while maintaining content consistency
+- Creating an intuitive navigation system for complex service hierarchies
+- Optimizing performance with real-time data updates
 
-## Features
+## Accomplishments that we're proud of
 
-- Modern, responsive design that works on all devices
-- Comprehensive directory of government services and agencies
-- User-friendly navigation and search
-- Accessibility features for users with disabilities
-- Regular updates and maintenance
+- Created a modern, accessible interface for government services
+- Implemented a powerful search and filtering system
+- Developed a responsive design that works seamlessly on all devices
+- Built a scalable architecture that can accommodate future features
+- Achieved excellent performance metrics and load times
+- Successfully integrated real-time data feeds for weather and forex
+- Created a comprehensive design system for consistent user experience
 
-## Join Us as a Volunteer
+## What we learned
 
-We're always looking for passionate individuals to help improve BetterGov.ph. We need volunteers with various skills:
+- Best practices for organizing large-scale government service directories
+- Techniques for optimizing search functionality across large datasets
+- Strategies for managing multilingual content effectively
+- Approaches to building accessible government service platforms
+- Methods for integrating real-time data feeds efficiently
+- Importance of user-centered design in government service portals
 
-- Frontend and backend developers
-- UX/UI designers
-- Content writers and editors
-- Translators (for Filipino and other local languages)
-- Accessibility experts
-- Project managers
-- QA testers
+## What's next for Philippine Government Website
 
-If you're interested in contributing, please reach out to us at [volunteers@bettergov.ph](mailto:volunteers@bettergov.ph) or open an issue in this repository.
+Future development plans include:
 
-## Code of Conduct
-
-We are committed to fostering a welcoming and respectful community.  
-Please read our [Code of Conduct](https://github.com/bettergovph/bettergov/blob/main/CODE_OF_CONDUCT.md) before participating.
-
-## Contributing
-
-We welcome contributions from everyone!  
-Please see our [Contributing Guide](/docs/contributing) for details on:
-
-- Development setup
-- Reporting bugs
-- Opening issues and pull requests
-
-## How to Run
-
-```bash
-# Install packages
-npm install
-
-# Start the server
-npm run dev
-```
-
-**Access the application at:** `http://localhost:5173`
-
-## Docker
-
-This project includes Docker support for easy deployment and consistent environments.
-
-### Building and Running
-
-```bash
-# Build the Docker image
-docker build -t bettergov .
-
-# Run the container
-docker run -p 8080:80 bettergov
-
-# Run in detached mode
-docker run -d -p 8080:80 --name bettergov bettergov
-```
-
-**Access the application at:** `http://localhost:8080`
-
-### Docker Compose
-
-```bash
-# Start the service
-docker-compose up
-
-# Start in detached mode
-docker-compose up -d
-
-# Stop the service
-docker-compose down
-```
-
-The Dockerfile uses a multi-stage build with Node.js for building and nginx for serving the static files.
-
-## Testing
-
-This project uses Playwright for end-to-end testing.  
-For setup instructions, coverage details, and examples, see our [Testing Guide](/docs/contributing/testing).
-
-## Contributing
-
-Thanks to all the people who already contributed!
-
-<a href="https://github.com/bettergovph/bettergov/graphs/contributors">
-    <img src="https://contributors-img.web.app/image?repo=bettergovph/bettergov&max=750&columns=20" />
-</a>
-
-## License
-
-This project is released under the [Creative Commons CC0](https://creativecommons.org/publicdomain/zero/1.0/) dedication. This means the work is dedicated to the public domain and can be freely used by anyone for any purpose without restriction under copyright law.
-
----
+- Integration with government authentication systems
+- Real-time status tracking for government applications
+- Mobile app development
+- Enhanced personalization features
+- Integration with more government services
+- Advanced analytics for service usage patterns
+- Expanded language support for regional dialects
+- AI-powered chatbot for service recommendations
+- Offline functionality for essential services
+- Integration with digital payment systems
