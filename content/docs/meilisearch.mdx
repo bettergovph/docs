@@ -104,7 +104,7 @@ For more installation options, check the [official installation guide](https://w
 
 Now, let's tell the app how to connect to Meilisearch. Create a `.env` file in the project root (you can copy `.env.example` as a starting point):
 
-```bash
+```env
 # Where Meilisearch lives
 VITE_MEILISEARCH_HOST=http://localhost
 VITE_MEILISEARCH_PORT=7700
@@ -189,7 +189,7 @@ npm run index:create-key
 
 This will show you a new API key. Copy it and update your `.env` file:
 
-```bash
+```env
 VITE_MEILISEARCH_SEARCH_API_KEY=<paste_your_generated_key_here>
 ```
 
