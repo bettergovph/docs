@@ -13,7 +13,7 @@ export function baseOptions(): BaseLayoutProps {
     nav: {
       title: (
         <div className="flex items-center gap-2">
-          <BetterGovLogo className="w-6 h-6" aria-hidden={true} />
+          <BetterGovLogo className="w-10 h-10" aria-hidden={true} />
           <span className="font-semibold">BetterGovPH Documentation</span>
         </div>
       ),
