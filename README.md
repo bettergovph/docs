@@ -44,9 +44,10 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 ## Documentation Sync
 
-This documentation site automatically syncs with the upstream [BetterGov repository](https://github.com/bettergovph/bettergov) to keep content up-to-date. When the upstream repository updates their documentation files, this site will automatically receive those updates within 12 hours.
+This documentation site automatically syncs with the upstream [BetterGov repository](https://github.com/bettergovph/bettergov) to keep content up-to-date. When the upstream repository updates their documentation files, this site will automatically receive those updates within 12 hours and apply them directly without requiring manual approval.
 
 - **Automatic Sync**: GitHub Actions workflow runs every 12 hours
+- **Auto-Merge**: Documentation updates are automatically applied (no PR review needed)
 - **Manual Sync**: Run `npm run sync-docs` to sync immediately
 - **Files Synced**: README.md, docs/, CONTRIBUTING.md, CODE_OF_CONDUCT.md, TESTING.md
 - **Source**: Updates come from [bettergovph/bettergov](https://github.com/bettergovph/bettergov)

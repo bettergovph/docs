@@ -52,22 +52,3 @@ jobs:
           git add .
           git commit -m "docs: sync documentation from BetterGov repository [skip ci]"
           git push
-
-      - name: Create Pull Request if needed
-        if: steps.verify-changed-files.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "docs: sync documentation from BetterGov repository"
-          title: "Sync Documentation from BetterGov"
-          body: |
-            This PR automatically syncs documentation files from the main BetterGov repository.
-            
-            **Files synced:**
-            - Documentation files from `docs/` directory
-            - README.md updates
-            - Other markdown files as configured
-            
-            **Source:** [bettergovph/bettergov](https://github.com/bettergovph/bettergov)
-          branch: sync-docs-from-bettergov
-          delete-branch: true
