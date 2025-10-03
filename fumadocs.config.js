@@ -4,11 +4,11 @@
 const config = {
   // Site metadata
   site: {
-    title: 'BetterGov Documentation',
+    title: 'BetterGovPH Documentation',
     description: 'Documentation for BetterGov.ph - a modern platform that centralizes Philippine government services and information.',
     url: 'https://docs.bettergov.ph',
     logo: {
-      text: 'BetterGov',
+      text: 'BetterGovPH',
       icon: '/logo.svg'
     }
   },
@@ -26,7 +26,7 @@ const config = {
       }
     },
     navbar: {
-      title: 'BetterGov Docs',
+      title: 'BetterGovPH Docs',
       logo: '/logo.svg',
       links: [
         {
