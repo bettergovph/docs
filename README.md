@@ -4,9 +4,9 @@ Documentation site for the BetterGov platform built with Fumadocs and Next.js.
 
 ## About
 
-BetterGov.ph is a modern platform that centralizes Philippine government services and information, 
-making them more accessible to citizens. This documentation provides guides, API references, and resources for
-contributors and users.
+BetterGov.ph is a modern platform that centralizes Philippine government services and information,
+making them more accessible to citizens. This documentation provides guides, API references, and
+resources for contributors and users.
 
 ## Tech Stack
 
@@ -55,7 +55,10 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 ## Documentation Sync
 
-This documentation site automatically syncs with the upstream [BetterGov repository](https://github.com/bettergovph/bettergov) to keep content up-to-date. When the upstream repository updates their documentation files, this site will automatically receive those updates within 12 hours and commit them directly to the main branch.
+This documentation site automatically syncs with the upstream
+[BetterGov repository](https://github.com/bettergovph/bettergov) to keep content up-to-date. When
+the upstream repository updates their documentation files, this site will automatically receive
+those updates within 12 hours and commit them directly to the main branch.
 
 - **Automatic Sync**: GitHub Actions workflow runs every 12 hours
 - **Direct Commit**: Documentation updates are automatically committed to main (no PR review)
@@ -64,6 +67,7 @@ This documentation site automatically syncs with the upstream [BetterGov reposit
 - **Source**: Updates come from [bettergovph/bettergov](https://github.com/bettergovph/bettergov)
 
 For detailed sync configuration and troubleshooting, see the documentation files in the repository:
+
 - [Sync Guide](content/docs/sync-guide.mdx)
 - [Token Setup](content/docs/token-setup.mdx)
 
