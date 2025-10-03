@@ -14,7 +14,7 @@ export function baseOptions(): BaseLayoutProps {
       title: (
         <div className="flex items-center gap-2">
           <BetterGovLogo className="w-6 h-6" aria-hidden={true} />
-          <span className="font-semibold">BetterGov Documentation</span>
+          <span className="font-semibold">BetterGovPH Documentation</span>
         </div>
       ),
     },

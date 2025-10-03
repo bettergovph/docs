@@ -10,8 +10,8 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://docs.bettergov.ph'),
   title: {
-    default: 'BetterGov Documentation',
-    template: '%s | BetterGov Documentation',
+    default: 'BetterGovPH Documentation',
+    template: '%s | BetterGovPH Documentation',
   },
   description: 'Comprehensive documentation for BetterGov.ph - Building better government services for the Philippines',
   icons: {
