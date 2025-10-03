@@ -9,6 +9,28 @@ const BETTERGOV_REPO = 'bettergovph/bettergov';
 const BETTERGOV_BRANCH = 'main';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
+/**
+ * Clean content for MDX compatibility
+ */
+function cleanForMDX(content) {
+  // Replace HTML comments with JSX comments
+  content = content.replace(/<!--([\s\S]*?)-->/g, '{/*$1*/}');
+  
+  // Replace unsupported code block languages
+  const languageMap = {
+    'env': 'bash',
+    'dotenv': 'bash',
+    'shell': 'bash',
+  };
+  
+  Object.entries(languageMap).forEach(([from, to]) => {
+    const regex = new RegExp('```' + from + '\\b', 'g');
+    content = content.replace(regex, '```' + to);
+  });
+  
+  return content;
+}
+
 // Files to sync from BetterGov repository
 const FILES_TO_SYNC = [
   {
@@ -22,7 +44,7 @@ description: Learn about the BetterGov initiative and our mission to improve Phi
 ---
 
 `;
-      return frontmatter + content;
+      return frontmatter + cleanForMDX(content);
     }
   },
   {
@@ -36,7 +58,7 @@ description: Configure and use Meilisearch for search functionality in BetterGov
 ---
 
 `;
-      return frontmatter + content;
+      return frontmatter + cleanForMDX(content);
     }
   },
   {
@@ -50,7 +72,7 @@ description: Learn how to contribute to the BetterGov project
 ---
 
 `;
-      return frontmatter + content;
+      return frontmatter + cleanForMDX(content);
     }
   },
   {
@@ -64,7 +86,7 @@ description: Our community guidelines and code of conduct
 ---
 
 `;
-      return frontmatter + content;
+      return frontmatter + cleanForMDX(content);
     }
   },
   {
@@ -78,7 +100,7 @@ description: Testing guidelines and setup for BetterGov
 ---
 
 `;
-      return frontmatter + content;
+      return frontmatter + cleanForMDX(content);
     }
   }
 ];
