@@ -4,6 +4,7 @@ import {
   frontmatterSchema,
   metaSchema,
 } from 'fumadocs-mdx/config';
+import { remarkRemoveFirstH1 } from './src/lib/remark/remove-first-h1';
 import { z } from 'zod';
 
 // Enhanced frontmatter schema for BetterGov documentation
@@ -40,6 +41,7 @@ export default defineConfig({
   mdxOptions: {
     remarkPlugins: [
       // Add remark plugins for enhanced markdown processing
+      remarkRemoveFirstH1,
     ],
     rehypePlugins: [
       // Add rehype plugins for HTML processing

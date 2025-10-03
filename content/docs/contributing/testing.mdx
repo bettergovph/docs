@@ -3,13 +3,11 @@ title: Testing Guide
 description: Testing guidelines and setup for BetterGov
 ---
 
-## Testing
-
-### End-to-End Testing
+## End-to-End Testing
 
 This project uses Playwright for end-to-end testing to ensure critical user flows work correctly across different browsers and devices.
 
-#### Running E2E Tests
+### Running E2E Tests
 
 - `npm run test:e2e` - Run all E2E tests headlessly
 - `npm run test:e2e:ui` - Open Playwright UI to run and debug tests interactively
@@ -17,7 +15,7 @@ This project uses Playwright for end-to-end testing to ensure critical user flow
 - `npm run test:e2e:debug` - Debug tests with Playwright Inspector
 - `npm run test:e2e:codegen` - Record new tests using Playwright's code generator
 
-#### E2E Test Coverage
+### E2E Test Coverage
 
 Our E2E tests cover:
 
@@ -47,7 +45,7 @@ Our E2E tests cover:
    - Image optimization
    - Slow network handling
 
-#### Writing E2E Tests
+### Writing E2E Tests
 
 E2E tests are located in the `e2e/` directory. Example test structure:
 
