@@ -19,6 +19,18 @@ function cleanForMDX(content) {
   // Remove "back to top" links
   content = content.replace(/<p align="right">\(<a href="#readme-top">back to top<\/a>\)<\/p>\s*/g, '');
   
+  // Fix links to repository files - convert to external GitHub links
+  const repoUrl = 'https://github.com/bettergovph/bettergov/blob/main';
+  
+  // Fix relative links to repository files
+  content = content.replace(/\[([^\]]+)\]\(\.\/CODE_OF_CONDUCT\.md\)/g, `[$1](${repoUrl}/CODE_OF_CONDUCT.md)`);
+  content = content.replace(/\[([^\]]+)\]\(\.\/CONTRIBUTING\.md\)/g, `[$1](/docs/contributing)`);
+  content = content.replace(/\[([^\]]+)\]\(\.\/README\.md\)/g, `[$1](/docs/about)`);
+  content = content.replace(/\[([^\]]+)\]\(\.\/TESTING\.md\)/g, `[$1](/docs/contributing/testing)`);
+  content = content.replace(/\[([^\]]+)\]\(\.\/\.env\.example\)/g, `[$1](${repoUrl}/.env.example)`);
+  content = content.replace(/\[([^\]]+)\]\(\.\/docs\/Meilisearch\.md\)/g, `[$1](/docs/meilisearch)`);
+  content = content.replace(/\[([^\]]+)\]\(docs\/Meilisearch\.md\)/g, `[$1](/docs/meilisearch)`);
+  
   // Replace unsupported code block languages
   const languageMap = {
     'env': 'bash',
