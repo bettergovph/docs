@@ -7,6 +7,11 @@ on:
     # Allow manual triggering
   repository_dispatch:
     types: [sync-docs]
+  pull_request:
+    # Run on pull requests
+  push:
+    branches:
+      - main
 jobs:
   sync-docs:
     runs-on: ubuntu-latest
@@ -24,8 +29,19 @@ jobs:
           cache-dependency-path: package-lock.json
       - name: Install dependencies
         run: |
-          echo "Running npm ci..."
-          npm ci || (echo "npm ci failed, falling back to npm install" && npm install)
+          # Remove package-lock.json to force fresh install
+          rm -f package-lock.json
+          npm install
+          
+      - name: Commit updated lock file if changed
+        run: |
+          if ! git diff --quiet package-lock.json; then
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git add package-lock.json
+            git commit -m "chore: update package-lock.json [skip ci]"
+            git push
+          fi
       - name: Sync documentation from BetterGov
         run: |
           node scripts/sync-docs.js
