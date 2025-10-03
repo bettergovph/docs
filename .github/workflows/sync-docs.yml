@@ -24,10 +24,26 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          # temporarily disable cache to avoid stale node_modules issues
+          cache: 'none'
+
+      - name: Check Node.js and npm versions
+        run: |
+          node -v
+          npm -v
+
+      - name: Clean existing modules
+        run: |
+          rm -rf node_modules
+          rm -f package-lock.json
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          echo "Installing dependencies..."
+          npm ci || npm install
+
+      - name: List installed picomatch versions
+        run: npm ls picomatch || true
 
       - name: Sync documentation from BetterGov
         run: |
