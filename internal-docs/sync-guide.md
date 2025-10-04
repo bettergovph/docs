@@ -1,8 +1,3 @@
----
-title: Documentation Sync Guide
-description: Learn how to sync documentation from the main BetterGov repository
----
-
 # Documentation Sync Guide
 
 This guide explains how the BetterGov documentation site automatically syncs with the main [BetterGov repository](https://github.com/bettergovph/bettergov) to keep documentation up-to-date.
