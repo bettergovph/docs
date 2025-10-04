@@ -68,8 +68,7 @@ those updates within 12 hours and commit them directly to the main branch.
 
 For detailed sync configuration and troubleshooting, see the documentation files in the repository:
 
-- [Sync Guide](content/docs/sync-guide.mdx)
-- [Token Setup](content/docs/token-setup.mdx)
+- [Sync Guide](internal-docs/sync-guide.md)
 
 ## Contributing
 
