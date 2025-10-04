@@ -1,5 +1,4 @@
 name: Sync Documentation from BetterGov
-
 on:
   schedule:
     # Run every 12 hours to check for updates
@@ -8,11 +7,17 @@ on:
     # Allow manual triggering
   repository_dispatch:
     types: [sync-docs]
+  pull_request:
+    # Run on pull requests
+  push:
+    branches:
+      - main
 
 jobs:
   sync-docs:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,13 +33,10 @@ jobs:
           cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        run: |
-          echo "Running npm ci..."
-          npm ci || (echo "npm ci failed, falling back to npm install" && npm install)
+        run: npm ci
 
       - name: Sync documentation from BetterGov
-        run: |
-          node scripts/sync-docs.js
+        run: node scripts/sync-docs.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -48,7 +50,7 @@ jobs:
           fi
 
       - name: Commit and push changes
-        if: steps.verify-changed-files.outputs.changed == 'true'
+        if: steps.verify-changed-files.outputs.changed == 'true' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch')
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
