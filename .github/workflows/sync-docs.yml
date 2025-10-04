@@ -12,41 +12,34 @@ on:
   push:
     branches:
       - main
+
 jobs:
   sync-docs:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
           cache-dependency-path: package-lock.json
+
       - name: Install dependencies
-        run: |
-          # Remove package-lock.json to force fresh install
-          rm -f package-lock.json
-          npm install
-          
-      - name: Commit updated lock file if changed
-        run: |
-          if ! git diff --quiet package-lock.json; then
-            git config --local user.email "action@github.com"
-            git config --local user.name "GitHub Action"
-            git add package-lock.json
-            git commit -m "chore: update package-lock.json [skip ci]"
-            git push
-          fi
+        run: npm ci
+
       - name: Sync documentation from BetterGov
-        run: |
-          node scripts/sync-docs.js
+        run: node scripts/sync-docs.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Check for changes
         id: verify-changed-files
         run: |
@@ -55,8 +48,9 @@ jobs:
           else
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
+
       - name: Commit and push changes
-        if: steps.verify-changed-files.outputs.changed == 'true'
+        if: steps.verify-changed-files.outputs.changed == 'true' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch')
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
