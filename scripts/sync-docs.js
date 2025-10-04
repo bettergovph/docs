@@ -25,7 +25,8 @@ function cleanForMDX(content) {
   // Fix relative links to repository files
   content = content.replace(/\[([^\]]+)\]\(\.\/CODE_OF_CONDUCT\.md\)/g, `[$1](${repoUrl}/CODE_OF_CONDUCT.md)`);
   content = content.replace(/\[([^\]]+)\]\(\.\/CONTRIBUTING\.md\)/g, `[$1](/docs/contributing)`);
-  content = content.replace(/\[([^\]]+)\]\(\.\/README\.md\)/g, `[$1](/docs/about)`);
+  content = content.replace(/\[([^\]]+)\]\(\.\/README\.md\)/g, `[$1](/docs)`);
+  content = content.replace(/\[([^\]]+)\]\(\.\/ABOUT\.md\)/g, `[$1](/docs/about)`);
   content = content.replace(/\[([^\]]+)\]\(\.\/TESTING\.md\)/g, `[$1](/docs/contributing/testing)`);
   content = content.replace(/\[([^\]]+)\]\(\.\/\.env\.example\)/g, `[$1](${repoUrl}/.env.example)`);
   content = content.replace(/\[([^\]]+)\]\(\.\/docs\/Meilisearch\.md\)/g, `[$1](/docs/meilisearch)`);
@@ -48,6 +49,20 @@ function cleanForMDX(content) {
 
 // Files to sync from BetterGov repository
 const FILES_TO_SYNC = [
+  {
+    source: 'README.md',
+    target: 'content/docs/getting-started.mdx',
+    transform: (content) => {
+      // Convert README.md to MDX format with frontmatter
+      const frontmatter = `---
+title: Getting Started
+description: Welcome to BetterGov - Improving Philippine government websites
+---
+
+`;
+      return frontmatter + cleanForMDX(content);
+    }
+  },
   {
     source: 'ABOUT.md',
     target: 'content/docs/about.mdx',
