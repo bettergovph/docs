@@ -94,18 +94,61 @@ export function getPageNavigation(currentPage: PageType): {
 }
 
 /**
- * Search pages by title and content
+ * Search pages by title, description, and tags
+ * Optimized for metadata-based search (faster than full-text)
  */
 export function searchPages(query: string): PageType[] {
+  if (!query.trim()) return [];
+  
   const searchTerm = query.toLowerCase();
   
   return source.getPages().filter(page => {
     const titleMatch = page.data.title.toLowerCase().includes(searchTerm);
     const descriptionMatch = page.data.description?.toLowerCase().includes(searchTerm);
     const tagMatch = page.data.tags?.some(tag => tag.toLowerCase().includes(searchTerm));
+    const categoryMatch = page.data.category?.toLowerCase().includes(searchTerm);
     
-    return titleMatch || descriptionMatch || tagMatch;
+    return titleMatch || descriptionMatch || tagMatch || categoryMatch;
   });
+}
+
+/**
+ * Advanced search with filters and sorting
+ */
+export function advancedSearch(options: {
+  query?: string;
+  tags?: string[];
+  category?: string;
+  difficulty?: 'beginner' | 'intermediate' | 'advanced';
+  sortBy?: 'title' | 'date' | 'relevance';
+}): PageType[] {
+  let results = source.getPages();
+  
+  // Apply filters
+  if (options.query) {
+    results = searchPages(options.query);
+  }
+  
+  if (options.tags?.length) {
+    results = results.filter(page => 
+      options.tags!.some(tag => page.data.tags?.includes(tag))
+    );
+  }
+  
+  if (options.category) {
+    results = results.filter(page => page.data.category === options.category);
+  }
+  
+  if (options.difficulty) {
+    results = results.filter(page => page.data.difficulty === options.difficulty);
+  }
+  
+  // Apply sorting
+  if (options.sortBy === 'title') {
+    results.sort((a, b) => a.data.title.localeCompare(b.data.title));
+  }
+  
+  return results;
 }
 
 /**

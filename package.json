@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "fumadocs-mdx && next dev",
+    "dev:watch": "fumadocs-mdx --watch & next dev",
     "build": "fumadocs-mdx && next build",
     "start": "next start",
     "export": "next build && next export",
